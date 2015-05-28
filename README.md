@@ -33,7 +33,7 @@ var loader = new URW({
 loader.use(function cdnUrl (resource) {
   if (typeof resource !== 'string')
     return resource
-  return this.domain + resource + '.js'
+  return this.config.domain + resource + '.js'
 })
 var promise2 = loader.load(
   ['zepto', 'hammer'],
