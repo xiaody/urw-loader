@@ -9,8 +9,8 @@ A minimalist JavaScript loader that you can actually understand and extend.
 ```javascript
 var loader = new URW
 var promise1 = loader.load(
-  ['http://s0.meituan.net/zepto.js', 'http://s0.meituan.net/hammer.js'],
-  'http://s0.meituan.net/paidui/page.js',
+  ['http://s0.cdn.net/zepto.js', 'http://s0.cdn.net/hammer.js'],
+  'http://s0.cdn.net/paidui/page.js',
   function initPage () {
     // use zepto, hammer, page.js
   }
@@ -27,7 +27,7 @@ var promise1 = loader.load(
 ```javascript
 var loader = new URW
 loader.use(function cdnUrl (resource) {
-  return 'http://s0.meituan.net/' + resource + '.js'
+  return 'http://s0.cdn.net/' + resource + '.js'
 })
 var promise2 = loader.load(
   ['zepto', 'hammer'],
