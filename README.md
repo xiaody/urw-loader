@@ -24,24 +24,30 @@ var promise1 = loader.load(
 //                                   initPage()
 ```
 
-## extend it
+## use middlewares
 
 ```javascript
 var loader = new URW({
-    domain: '//s0.cdn.net/'
+  domain: '//s0.cdn.net/'
 })
-loader.use(function cdnUrl (resource) {
-  if (typeof resource !== 'string')
-    return resource
-  return this.config.domain + resource + '.js'
+
+loader.use(function addext (resource) {
+  return resource + '.js'
+}).use(function comboGroup (resource) {
+  return this.config.domain + '?combo=' + resource.join()
+}).use(function timing (resource, progress) {
+    var start = Date.now()
+    progress.then(function () {
+        console.info('urw timing:', Date.now() - start, resource)
+    })
 })
+
 var promise2 = loader.load(
   ['zepto', 'hammer'],
-  'paidui/page',
-  function initPage () { }
-)
-/* promise2 has exactly the same timeline with promise1*/
+  'paidui/page'
+).then(function initPage () {})
 ```
+
 
 # loadable resources
 String, function, Promise and Array are loadable.
