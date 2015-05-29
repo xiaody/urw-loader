@@ -1,6 +1,6 @@
 A minimalist frontend resource loader that you can actually understand and extend.
 
-701 bytes (gzip)
+714 bytes (gzip)
 
 Notice: urw-loader is expected to be used in an environment which has Promise and common Array methods.
 
