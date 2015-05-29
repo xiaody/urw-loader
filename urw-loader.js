@@ -5,6 +5,7 @@
 
 function URW (config) {
     this.config = config = config || {};
+    this.util = URW.util;
     this._middlewares = [];
 
     var loader = this;
@@ -32,24 +33,20 @@ URW.prototype = {
 
         // each argument is a step
         for (i = 0, len = arguments.length; i < len; i++) {
-            // var progress represent the state of this step
-            // we dont use Promise.defer 'cuz its not standardized
             progress = new Promise(function (res) {
                 resolve = res;
             });
             resource = loader._preprocess(arguments[i], progress);
 
-            if (!ret) { // fist step
+            if (!ret) {
                 ret = loader._load(resource);
-            } else { // other steps follows
+            } else { // other steps follow
                 ret = (function (resource) {
                     return ret.then(function () {
                         return loader._load(resource);
                     });
                 })(resource);
             }
-
-            // resolve progress after this step is loaded
             (function (resolve) {
                 ret.then(resolve);
             })(resolve);
@@ -71,6 +68,8 @@ URW.prototype = {
         return ret;
     },
 
+    // a normal middleware always receives a single resource,
+    // even if the previous middleware return an array
     _processSingle: function (ware, resource, progress) {
         var loader = this;
         if (Array.isArray(resource))
@@ -80,6 +79,9 @@ URW.prototype = {
         return ware.call(this, resource, progress);
     },
 
+    // a middleware whos name ends with Group
+    // will always receive a array,
+    // even if the previous middleware return a single resource
     _processGroup: function (ware, resource, progress) {
         if (!Array.isArray(resource))
             resource = [resource];
@@ -89,18 +91,19 @@ URW.prototype = {
     _load: function (href) {
         var loader = this;
         return new Promise(function (resolve) {
+            var util = loader.util;
             if (Array.isArray(href))
                 return resolve(Promise.all(href.map(function (item) {
                     return loader._load(item);
                 })));
             if (typeof href === 'function')
                 return resolve(href.call(window));
-            if (isThenable(href))
+            if (util.isThenable(href))
                 return resolve(href);
             href += '';
             if (!href)
                 return resolve();
-            resolve(loadJS(href)); // TODO other mime types?
+            resolve(util.load(href));
         });
     }
 
@@ -108,7 +111,7 @@ URW.prototype = {
 
 URW.plugins = {};
 URW.util = {
-    loadJS: loadJS,
+    load: loadJS, // you can overwrite .load method to change the fetch method
     isThenable: isThenable
 };
 

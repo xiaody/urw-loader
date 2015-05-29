@@ -1,4 +1,4 @@
-A minimalist JavaScript loader that you can actually understand and extend.
+A minimalist frontend resource loader that you can actually understand and extend.
 
 701 bytes (gzip)
 
@@ -51,3 +51,7 @@ var promise2 = loader.load(
 
 # loadable resources
 String, function, Promise and Array are loadable.
+
+# request method
+You can overwrite the util.load method to change the request method,
+e.g. load js by xhr or load css.
