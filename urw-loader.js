@@ -33,12 +33,14 @@ URW.prototype = {
 
         // each argument is a step
         for (i = 0, len = arguments.length; i < len; i++) {
+            // var progress represent the state of this step
+            // we dont use Promise.defer 'cuz its not standardized
             progress = new Promise(function (res) {
                 resolve = res;
             });
             resource = loader._preprocess(arguments[i], progress);
 
-            if (!ret) {
+            if (!ret) { // the first step
                 ret = loader._load(resource);
             } else { // other steps follow
                 ret = (function (resource) {
@@ -47,6 +49,8 @@ URW.prototype = {
                     });
                 })(resource);
             }
+
+            // resolve progress after this step is loaded
             (function (resolve) {
                 ret.then(resolve);
             })(resolve);
