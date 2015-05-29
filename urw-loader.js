@@ -79,8 +79,8 @@ URW.prototype = {
         return ware.call(this, resource, progress);
     },
 
-    // a middleware whos name ends with Group
-    // will always receive a array,
+    // a middleware whose name ends with "Group"
+    // will always receive an array,
     // even if the previous middleware return a single resource
     _processGroup: function (ware, resource, progress) {
         if (!Array.isArray(resource))
