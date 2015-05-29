@@ -6,6 +6,8 @@ Notice: urw-loader is expected to be used in an environment which has Promise an
 
 # sample code
 
+By default, a urw loader recognize strings as javascript file uri and load them by &lt;script async> tags.
+
 ## a simple loader
 
 ```javascript
@@ -52,6 +54,6 @@ var promise2 = loader.load(
 # loadable resources
 String, function, Promise and Array are loadable.
 
-# request method
-You can overwrite the util.load method to change the request method,
-e.g. load js by xhr or load css.
+# download method
+You can overwrite the URW.util.load or loader.util.load method to change the download method,
+e.g. when you want to load js by xhr or load css.
