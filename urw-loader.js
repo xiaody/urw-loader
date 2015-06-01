@@ -1,3 +1,6 @@
+/**
+ * @version 1.0.0
+ */
 /*jshint browser:true, loopfunc:true*/
 ;(function () {
 
@@ -5,7 +8,7 @@
 
 function URW (config) {
     this.config = config = config || {};
-    this.util = URW.util;
+    this.util = Object.create(URW.util);
     this._middlewares = [];
 
     var loader = this;
