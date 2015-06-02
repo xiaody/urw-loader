@@ -1,4 +1,7 @@
 /**
+ * Unlimited Resource Works
+ * A minimalist frontend resource loader that
+ * you can actually understand and extend.
  * @version 1.0.0
  */
 /*jshint browser:true, loopfunc:true*/
