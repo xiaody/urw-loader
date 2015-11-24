@@ -1,6 +1,11 @@
+<a href="http://standardjs.com/">
+    <img src="https://cdn.rawgit.com/feross/standard/master/badge.svg" alt="standardjs logo"
+        title="JavaScript Standard Style" align="right" />
+</a>
+
 A minimalist frontend resource loader that you can actually understand and extend.
 
-721 bytes (gzip)
+725 bytes (gzip)
 
 Notice: urw-loader is expected to be used in an environment which has Promise and common Array methods.
 
