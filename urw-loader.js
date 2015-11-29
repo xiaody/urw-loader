@@ -2,7 +2,7 @@
  * Unlimited Resource Works
  * A minimalist frontend resource loader that
  * you can actually understand and extend.
- * @version 1.1.0
+ * @version 1.1.1
  * @license MIT
  * @flow weak
  */
@@ -56,7 +56,7 @@
         })(resource)
 
         // resolve progress after this step is loaded
-        (function (resolve) {
+        ;(function (resolve) {
           ret.then(resolve)
         })(resolve)
       }
