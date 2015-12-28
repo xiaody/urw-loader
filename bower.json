@@ -1,0 +1,22 @@
+{
+  "name": "urw-loader",
+  "main": "urw-loader.js",
+  "homepage": "https://github.com/xiaody/urw-loader",
+  "authors": [
+    "xiaody <dongyangxiao@zhulux.com>"
+  ],
+  "description": "a minimal frontend loader",
+  "moduleType": [],
+  "keywords": [
+    "loader",
+    "promise"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
