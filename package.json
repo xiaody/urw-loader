@@ -1,0 +1,23 @@
+{
+  "name": "urw-loader",
+  "version": "1.2.0",
+  "description": "A minimalist frontend resource loader that you can actually understand and extend.",
+  "main": "urw-loader.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaody/urw-loader.git"
+  },
+  "keywords": [],
+  "author": "xiaody",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xiaody/urw-loader/issues"
+  },
+  "homepage": "https://github.com/xiaody/urw-loader#readme",
+  "devDependencies": {
+    "standard": "^9.0.0"
+  }
+}

@@ -2,11 +2,11 @@
  * Unlimited Resource Works
  * A minimalist frontend resource loader that
  * you can actually understand and extend.
- * @version 1.1.1
+ * @version 1.2.0
  * @license MIT
  * @flow weak
  */
-;(function () {
+;(function (global) {
   'use strict'
 
   function URW (config) {
@@ -44,7 +44,7 @@
       for (i = 0, len = arguments.length; i < len; i++) {
         // var progress represent the state of this step
         // we dont use Promise.defer 'cuz its not standardized
-        progress = new Promise(function (res) {
+        progress = new Promise(function (res) { // eslint-disable-line promise/param-names
           resolve = res
         })
         resource = loader._preprocess(arguments[i], progress)
@@ -110,7 +110,7 @@
           })))
         }
         if (typeof href === 'function') {
-          return resolve(href.call(window))
+          return resolve(href())
         }
         if (util.isThenable(href)) {
           return resolve(href)
@@ -130,7 +130,7 @@
     isThenable: isThenable
   }
 
-  window.URW = URW
+  global.URW = URW
 
   function isThenable (obj) {
     return obj && typeof obj === 'object' &&
@@ -156,4 +156,4 @@
     }
     return script
   }
-})()
+})(this)
