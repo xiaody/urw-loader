@@ -133,27 +133,19 @@
   global.URW = URW
 
   function isThenable (obj) {
-    return obj && typeof obj === 'object' &&
+    return !!obj && typeof obj === 'object' &&
         typeof obj.then === 'function'
   }
 
   function loadJS (src) {
     return new Promise(function (resolve, reject) {
-      _loadJS(src, resolve) // TODO error handling?
+      var ref = document.getElementsByTagName('script')[0]
+      var script = window.document.createElement('script')
+      script.src = src
+      script.async = true
+      script.onload = resolve
+      script.onerror = reject
+      ref.parentNode.insertBefore(script, ref)
     })
-  }
-
-  /*! loadJS: load a JS file asynchronously. [c]2014 @scottjehl, Filament Group, Inc.
-   * (Based on http://goo.gl/REQGQ by Paul Irish). Licensed MIT */
-  function _loadJS (src, cb) {
-    var ref = window.document.getElementsByTagName('script')[ 0 ]
-    var script = window.document.createElement('script')
-    script.src = src
-    script.async = true
-    ref.parentNode.insertBefore(script, ref)
-    if (cb && (typeof cb) === 'function') {
-      script.onload = cb
-    }
-    return script
   }
 })(this)
